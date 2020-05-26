@@ -1,0 +1,34 @@
+version: 2
+
+sources:
+  - name: asana
+    database: "{{var ('asana_database', target.database)}}"
+    schema: "{{var ('asana_schema', 'asana')}}"
+
+    loader: fivetran
+    loaded_at_field: _fivetran_synced
+      
+    freshness:
+      warn_after: {count: 72, period: hour}
+      error_after: {count: 96, period: hour}
+
+
+    tables:
+      - name: user
+        description: add description
+        freshness: null
+        tests:
+          - dbt_utils.unique_combination_of_columns:
+              combination_of_columns: 
+              - issue_id
+              - user_id
+        columns:
+          - name: id
+            description: add description
+            tests:
+                - unique
+                - not_null
+          - name: email
+            description: add description
+          - name: name
+            description: add description

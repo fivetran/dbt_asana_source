@@ -1,0 +1,18 @@
+config-version: 2
+
+name: 'asana_source'
+version: '0.0.1'
+
+require-dbt-version: [">=0.17.0", "<0.18.0"]
+
+models:
+    asana_source:
+        materialized: table # ephemeral after testing
+
+vars:
+    asana_source:
+        user: "{{ source('asana', 'user') }}"        
+
+
+# delete profile after testing
+profile: integration_test
