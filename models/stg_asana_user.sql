@@ -1,15 +1,15 @@
-with asana_user as (
+with user as (
 
     select *
-    from asana.user
+    from {{ var('user') }}
 
 ), fields as (
 
     select
       id as user_id,
       email,
-      name
-    from asana_user
+      name as user_name
+    from user
     where not _fivetran_deleted
 )
 

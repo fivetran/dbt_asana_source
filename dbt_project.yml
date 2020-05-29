@@ -1,4 +1,4 @@
-# config-version: 2
+config-version: 2
 
 name: 'asana_source'
 version: '0.0.1'
@@ -13,7 +13,17 @@ vars:
     asana_source:
         # asana_database: dbt-package-testing
         # asana_schema: asana
-        user: "{{ source('asana', 'user') }}"        
+        user: "{{ source('asana', 'user') }}" 
+        project: "{{ source('asana', 'project') }}"
+        task: "{{ source('asana', 'task') }}"
+        story: "{{ source('asana', 'story') }}"  
+        team: "{{ source('asana', 'team') }}"
+        tag: "{{ source('asana', 'tag') }}"
+        project_task: "{{ source('asana', 'project_task') }}" 
+        task_follower: "{{ source('asana', 'task_follower') }}" 
+        task_tag: "{{ source('asana', 'task_tag') }}"
+        section: "{{ source('asana', 'section') }}"
+        task_section: "{{ source('asana', 'task_section') }}"
 
 
 # delete profile after testing

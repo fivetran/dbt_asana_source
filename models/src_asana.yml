@@ -15,16 +15,81 @@ sources:
 
     tables:
       - name: user
-        description: add description
+        description: Table of all accounts in the organization
         freshness: null
         columns:
           - name: id
-            description: add description
+            description: Identifier for individual user
             tests:
                 - unique
                 - not_null
           - name: email
-            description: add description
+            description: Email associated with the user
+            tests:
+              - not_null # our data is never null -> probably required?
           - name: name
-            description: add description
+            description: Given name of the user
+            tests:
+              - not_null # our data is never null -> probably required?
+              
+      - name: task
+        description: Table containing all tasks ever opened in this workspace
+        freshness: null # tasks get updated as they are worked on/completed 
+        columns:
+          - name: id
+            description: System generated unique identifier for the task # in url? 
+            tests:
+              - unique
+              - not_null
+          - name: assignee_id
+            description: User ID of the user assigned to this task (some tasks may not have an assignee)
+          - name: assignee_status
+            description: Scheduling status for the assignee that the task is or will eventually be assigned to. This maps to the sections of a user's inbox
+            tests:
+              - accepted_values:
+                  values: ['inbox', 'today', 'upcoming', 'later', 'new'] # these should be the only options regardless of if there's an assignee or due date
+          - name: completed
+            description: Boolean that's true if the task is *currently* marked completed. A task can be unmarked 
+          - name: completed_at
+            description: Date-time at which the task was completed, if still currently completed.
+          - name: completed_by_id
+            description: Foreign key that references the USER who completed the task, if currently completed.
+          - name: created_at
+            description: When the task was first made
+          - name: due_on
+            description: The date on which the task is due. Not all tasks may have a due date
+          - name: due_at
+            description: The date and time at which the task is due, if a particular time is given. 
+          - name: modified_at
+            description: The last time the task was updated. Does not include comments nor changes in associations (ie projects)
+          - name: name
+            description: The title of the task
+          - name: notes
+            description: Free-form textual information associated with the task # descriptions included?
+          - name: parent_id
+            description: The task ID of the parent of the task, if it is a subtask. Self-refers to TASK
+          - name: start_on
+            description: The start date of the task, if inputted with the due date. 
+
+      - name: project
+        description: Table containing all projects, which contain tasks
+        freshness: null
+
+      - name: story
+
+      - name: team
+
+      - name: tag
+
+      - name: project_task
+
+      - name: task_follower
+
+      - name: task_tag
+
+      - name: section
+
+      - name: task_section
+            
+
       
