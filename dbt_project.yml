@@ -1,9 +1,9 @@
-config-version: 2
+# config-version: 2
 
 name: 'asana_source'
 version: '0.0.1'
 
-require-dbt-version: [">=0.17.0", "<0.18.0"]
+require-dbt-version: [">=0.16.0", "<0.18.0"]
 
 models:
     asana_source:
@@ -11,8 +11,10 @@ models:
 
 vars:
     asana_source:
+        # asana_database: dbt-package-testing
+        # asana_schema: asana
         user: "{{ source('asana', 'user') }}"        
 
 
 # delete profile after testing
-profile: integration_test
+profile: dev_bigquery_dbt_testing

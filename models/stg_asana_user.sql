@@ -1,7 +1,7 @@
 with asana_user as (
 
     select *
-    from {{ var('user') }}
+    from asana.user
 
 ), fields as (
 

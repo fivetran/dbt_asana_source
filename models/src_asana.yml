@@ -17,11 +17,6 @@ sources:
       - name: user
         description: add description
         freshness: null
-        tests:
-          - dbt_utils.unique_combination_of_columns:
-              combination_of_columns: 
-              - issue_id
-              - user_id
         columns:
           - name: id
             description: add description
@@ -32,3 +27,4 @@ sources:
             description: add description
           - name: name
             description: add description
+      
