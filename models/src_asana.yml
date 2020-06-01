@@ -32,9 +32,9 @@ sources:
             tests:
               - not_null # our data is never null -> probably required?
               
+
       - name: task
         description: Table containing all tasks ever opened in this workspace
-        freshness: null # tasks get updated as they are worked on/completed 
         columns:
           - name: id
             description: System generated unique identifier for the task # in url? 
@@ -73,9 +73,9 @@ sources:
           - name: start_on
             description: The start date of the task, if inputted with the due date. 
 
+
       - name: project
         description: Table containing all projects, which contain lists or a board of prioritized tasks
-        freshness: null
         columns:
           - name: id
             description: System generated unique ID of the project
@@ -103,6 +103,7 @@ sources:
           - name: team
             description: Foreign key referencing the TEAM that the project is shared with.
 
+
       - name: story
         description: Table containing all actions (stories) taken on tasks
         columns:
@@ -127,10 +128,48 @@ sources:
             description: The origin type of the story - a comment or change to the backend (altering a task)
 
       - name: team
+        description: Table of the teams within the organization
+        columns:
+          - name: id
+            description: System generated unique ID for each team
+            tests:
+              - unique
+              - not_null
+          - name: name
+            description: Provided name for each team
+            tests:
+              - unique: # Raise warning of duplicate team accounts 
+                  severity: warn
+
 
       - name: tag
+        description: Table of the custom tags made in the organization
+        freshness: null
+        columns:
+          - name: id
+            description: System generated ID for each tag
+            tests:
+              - unique
+              - not_null
+          - name: name
+            description: The name of the tag as it appears in the UI
+            tests:
+              - unique: # Raise warning of duplicate tags
+                  severity: warn
+          - name: created_at
+            description: Time when the tag was created
+            tests:
+              - not_null
+        
 
       - name: project_task
+        description: Table of tasks and the projects they belong to.
+        freshness: null
+        columns:
+          - name: project_id
+            description: Foreign key referencing the PROJECT the task belongs to
+          - name: task_id
+            description: Foreign key referncing the TASK in the project
 
       - name: task_follower
 
