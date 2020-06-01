@@ -56,6 +56,8 @@ sources:
             description: Foreign key that references the USER who completed the task, if currently completed.
           - name: created_at
             description: When the task was first made
+            tests:
+              - not_null
           - name: due_on
             description: The date on which the task is due. Not all tasks may have a due date
           - name: due_at
@@ -72,10 +74,47 @@ sources:
             description: The start date of the task, if inputted with the due date. 
 
       - name: project
-        description: Table containing all projects, which contain tasks
+        description: Table containing all projects, which contain lists or a board of prioritized tasks
         freshness: null
+        columns:
+          - name: id
+            description: System generated unique ID of the project
+            tests:
+              - unique
+              - not_null
+          - name: is_archived
+            description: Boolean representing whether the project has been archived (removed from asana UI)
+          - name: created_at
+            description: Date-time at which the story was made/the action was logged
+            tests:
+              - not_null
+          - name: current_status
+            description: The most recent progress status update for the project. This is sent to all project followers
+          - name: due_date
+            description: The date the project is due 
+          - name: modified_at
+            description: The last time the project was updated. Does not include comments nor changes in associations (ie tasks)
+          - name: name
+            description: The given name of the project
+          - name: owner_id
+            description: Foreign key referencing the USER who owns the project.
+          - name: public
+            description: Boolean that is true if the project is public to the whole organization, false if not.
+          - name: team
+            description: Foreign key referencing the TEAM that the project is shared with.
 
       - name: story
+        description: Table containing all actions (stories) taken on tasks
+        columns:
+          - name: id
+            description: System generated unique ID of the story/action taken
+            tests:
+              - unique
+              - not_null
+          - name: created_at
+            description: Date-time at which the story was made/the action was logged
+            tests:
+              - not_null
 
       - name: team
 
