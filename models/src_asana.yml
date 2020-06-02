@@ -26,11 +26,13 @@ sources:
           - name: email
             description: Email associated with the user
             tests:
-              - not_null # our data is never null -> probably required?
+              - not_null: # Asana notifications are by default also sent to the email
+                  severity: warn
           - name: name
-            description: Given name of the user
+            description: Given name for the user as it appears in the UI
             tests:
-              - not_null # our data is never null -> probably required?
+              - not_null: # All users should have names
+                  severity: warn
               
 
       - name: task
@@ -42,7 +44,7 @@ sources:
               - unique
               - not_null
           - name: assignee_id
-            description: User ID of the user assigned to this task (some tasks may not have an assignee)
+            description: Foreign key referncing the USER assigned to this task (some tasks may not have an assignee)
           - name: assignee_status
             description: Scheduling status for the assignee that the task is or will eventually be assigned to. This maps to the sections of a user's inbox
             tests:
@@ -69,7 +71,7 @@ sources:
           - name: notes
             description: Free-form textual information associated with the task # descriptions included?
           - name: parent_id
-            description: The task ID of the parent of the task, if it is a subtask. Self-refers to TASK
+            description: The ID of the parent of the task, if it is a subtask. Self-refers to TASK
           - name: start_on
             description: The start date of the task, if inputted with the due date. 
 
@@ -127,6 +129,7 @@ sources:
           - name: type # deprecated as of feb 2019 -> resource_subtype
             description: The origin type of the story - a comment or change to the backend (altering a task)
 
+
       - name: team
         description: Table of the teams within the organization
         columns:
@@ -162,22 +165,78 @@ sources:
               - not_null
         
 
+      - name: section
+        description: Table of all sections within projects. If a project has no section in the UI, it is still stored here with name = (no section)
+        columns:
+          - name: id
+            description: System generated unique ID for each section
+            tests:
+              - unique
+              - not_null
+          - name: created_at
+            description: Timestamp when the section was created by a user
+            tests:
+              - not_null
+          - name: name
+            description: The given name of the section as it appears in the UI. Is "(no name)" if the project is not sectioned
+          - name: project_id
+            description: Foreign key referencing the PROJECT that the section lives in
+            tests:
+              - not_null
+
       - name: project_task
-        description: Table of tasks and the projects they belong to.
+        description: Table of tasks and the project(s) they each belong to. If a project doesn't have a task, it won't be in here (and vice versa)
         freshness: null
+        tests:
+          - dbt_utils.unique_combination_of_columns:
+                combination_of_columns: 
+                - project_id
+                - task_id
         columns:
           - name: project_id
-            description: Foreign key referencing the PROJECT the task belongs to
+            description: Foreign key referencing a PROJECT the task belongs to
           - name: task_id
             description: Foreign key referncing the TASK in the project
 
+
       - name: task_follower
+        description: Table of tasks with the users that are following them. 
+        freshness: null
+        tests:
+          - dbt_utils.unique_combination_of_columns:
+                combination_of_columns: 
+                - task_id
+                - user_id
+        columns:
+          - name: task_id
+            description: Foreign key referencing the TASK being followed
+          - name: user_id
+            description: Foreign key referencing the USER that is following the task
 
+              
       - name: task_tag
-
-      - name: section
-
-      - name: task_section
+        description: Table of tasks with the tags attached to them. Tasks without tags (and vice versa) do not appear here.
+        tests:
+          - dbt_utils.unique_combination_of_columns:
+                combination_of_columns: 
+                - task_id
+                - tag_id
+        columns:
+          - name: task_id
+            description: Foreign key referencing the TASK that is tagged
+          - name: tag_id
+            description: Foreign key referencing the TAG that is applied to the task
             
 
-      
+      - name: task_section
+        description: Table relating tasks to the sections they belong to. Tasks without sections do not appear here, but tasks within a *section-less project* (where section.name = (no section)) do show up.
+        tests:
+          - dbt_utils.unique_combination_of_columns:
+                combination_of_columns: 
+                - section_id
+                - task_id
+        columns:
+          - name: section_id
+            description: Foreign key referencing the SECTION that the task lives under.
+          - name: task_id
+            description: Foreign key referencing the TASK that lives in a section.
