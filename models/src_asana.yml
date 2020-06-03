@@ -112,7 +112,7 @@ sources:
 
 
       - name: story
-        description: Table containing all stories -- storis are actions taken on tasks
+        description: Table containing all stories -- stories are actions taken on tasks
         columns:
           - name: id
             description: System generated unique ID of the story/action taken
@@ -236,7 +236,8 @@ sources:
             
 
       - name: task_section
-        description: Table relating tasks to the sections they belong to. Tasks without sections do not appear here, but tasks within a *section-less project* (where section.name = (no section)) do show up.
+        description: Table relating tasks to the sections they belong to. Tasks without projects do not appear here, but sectionless tasks within a project do show up, in sections called (no section).
+        # does the description make sense?
         tests:
           - dbt_utils.unique_combination_of_columns:
                 combination_of_columns: 
