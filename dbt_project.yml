@@ -11,8 +11,6 @@ models:
 
 vars:
     asana_source:
-        # asana_database: dbt-package-testing
-        # asana_schema: asana
         user: "{{ source('asana', 'user') }}" 
         project: "{{ source('asana', 'project') }}"
         task: "{{ source('asana', 'task') }}"

@@ -7,19 +7,19 @@ with task as (
 
     select
       id as task_id,
-      assignee_id,
+      assignee_id as assignee_user_id,
       assignee_status,
       completed as is_completed,
       completed_at,
       completed_by_id as completed_by_user_id,
       created_at,
-      due_on as due_date,
-      due_at as due_date_time,
+      coalesce(due_on, due_at) as due_date,
       modified_at,
       name as task_name,
       parent_id as parent_task_id,
       start_on as start_date,
-      coalesce(notes, '') != '' as has_notes -- does this belong in staging?
+      notes,
+      workspace_id
 
     from task
     
