@@ -69,7 +69,7 @@ sources:
           - name: name
             description: The title of the task
           - name: notes
-            description: Free-form textual information associated with the task # TODO: check if descriptions from 5tran data are included here
+            description: Free-form textual description of the task
           - name: parent_id
             description: The ID of the parent of the task, if it is a subtask. Self-refers to TASK
           - name: start_on

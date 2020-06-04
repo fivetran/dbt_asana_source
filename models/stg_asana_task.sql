@@ -18,7 +18,7 @@ with task as (
       name as task_name,
       parent_id as parent_task_id,
       start_on as start_date,
-      notes,
+      notes as task_description,
       workspace_id
 
     from task
