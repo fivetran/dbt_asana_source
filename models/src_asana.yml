@@ -124,7 +124,7 @@ sources:
             tests:
               - not_null
           - name: created_by_id
-            description: Foreign key referencing the USER who created the story/took the action on the task
+            description: Foreign key referencing the USER who created the story/took the action on the task. Sometimes null?
           - name: target_id
             description: Foreign key referencing the TASK that the story is about.
             tests:
