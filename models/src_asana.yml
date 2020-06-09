@@ -106,7 +106,7 @@ sources:
           - name: public
             description: Boolean that is true if the project is public to the whole organization, false if not.
           - name: team
-            description: Foreign key referencing the TEAM (can be multiple) that the project is shared with.
+            description: Foreign key referencing the TEAM that the project is shared with.
           - name: workspace_id
             description: The id of an organization's workspace in asana. Not necessary unless you have access to multiple asana workspaces.
 
