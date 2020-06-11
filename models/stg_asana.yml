@@ -1,0 +1,14 @@
+version: 2
+
+models:
+- name: stg_asana_project_task
+- name: stg_asana_project
+- name: stg_asana_section
+- name: stg_asana_story
+- name: stg_asana_tag
+- name: stg_asana_task_follower
+- name: stg_asana_task_section
+- name: stg_asana_task_tag
+- name: stg_asana_task
+- name: stg_asana_team
+- name: stg_asana_user
