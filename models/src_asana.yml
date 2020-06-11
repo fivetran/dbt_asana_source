@@ -31,7 +31,7 @@ sources:
           - name: name
             description: Given name for the user as it appears in the UI
             tests:
-              - not_null: # All users should have names - eh? 
+              - not_null: # All users should have names - eh? I would remove this if you're not 100% sure, especially if it's not a critical field used for a join.
                   severity: warn
               
 
@@ -128,7 +128,7 @@ sources:
           - name: target_id
             description: Foreign key referencing the TASK that the story is about.
             tests:
-              - not_null
+              - not_null #will this be non-null in all cases?
           - name: text
             description: Free-form text describing the action that was taken (if type = system), or the content of a comment (if type = comment)
           - name: type # deprecated as of feb 2019 -> resource_subtype
@@ -147,7 +147,8 @@ sources:
           - name: name
             description: Provided name for each team
             tests:
-              - unique: # Raise warning of duplicate team accounts 
+              - unique: # Raise warning of duplicate team accounts  
+              # why do we want to do this?  Does asana care if you use the same team name twice?
                   severity: warn
 
 
@@ -164,6 +165,7 @@ sources:
             description: The name of the tag as it appears in the UI
             tests:
               - unique: # Raise warning of duplicate tags
+              # why do we want to do this?  Does asana care if you use the same tag name twice?
                   severity: warn
           - name: created_at
             description: Time when the tag was created
