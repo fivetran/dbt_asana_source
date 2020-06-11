@@ -10,7 +10,7 @@ with story as (
       created_at,
       created_by_id as created_by_user_id,
       target_id as target_task_id,
-      text as event_description, -- eh is this a good name? the text describes the action taken or is the content of the comment
+      text as story_content, -- I like "content" for this. I feels like a term that can be used both for the system generated logs, as well as user text
       type as event_type
 
     from story
