@@ -84,7 +84,7 @@ sources:
             tests:
               - unique
               - not_null
-          - name: is_archived
+          - name: archived
             description: Boolean representing whether the project has been archived (removed from asana UI)
           - name: created_at
             description: Timestamp of when the story was made/the action was logged
