@@ -30,7 +30,7 @@ models:
       - name: workspace_id
         description: The ID of the organization's entire Asana workspace. Not relevant unless you're looking at multipke companies
  
-   - name: stg_asana_project_task
+  - name: stg_asana_project_task
     columns:
       - name: project_id
         description: Foreign key referencing the ID of the PROJECT
@@ -85,7 +85,7 @@ models:
       - name: tag_name
         description: User-facing name of the tag.
       - name: created_at
-        descritpion: Timestamp of when the tag was created
+        description: Timestamp of when the tag was created
 
   - name: stg_asana_task
     columns:
@@ -157,7 +157,7 @@ models:
   - name: stg_asana_team
     columns:
       - name: team_id
-        desctipion: System genereated unique ID for each team
+        description: System genereated unique ID for each team
         tests:
           - unique
           - not_null
