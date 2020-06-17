@@ -1,14 +1,177 @@
 version: 2
 
 models:
-- name: stg_asana_project_task
-- name: stg_asana_project
-- name: stg_asana_section
-- name: stg_asana_story
-- name: stg_asana_tag
-- name: stg_asana_task_follower
-- name: stg_asana_task_section
-- name: stg_asana_task_tag
-- name: stg_asana_task
-- name: stg_asana_team
-- name: stg_asana_user
+
+  - name: stg_asana_project
+    columns: 
+      - name: project_id
+        description: System-generated unique ID of the project
+        tests:
+          - unique
+          - not_null
+      - name: is_archived
+        description: Boolean representing if the project has been arhcived in the UI
+      - name: created_at
+        description: Timestamp of when the project was created
+      - name: current_status
+        description: The most recent progress status update for the project (free-form string)
+      - name: due_date
+        description: The date the project is due on, if given
+      - name: modified_at
+        description: Timestamp of when the project was last modified (doesn't include comments or tasks)
+      - name: project_name
+        description: The user-facing name of the project
+      - name: owner_user_id
+        description: Foreign key referencing the USER who owns the project.
+      - name: is_public
+        description: Boolean that is true if the project is public to all users in the organization
+      - name: team_id
+        description: Foreign key referencing the TEAM that the project is shared with.
+      - name: workspace_id
+        description: The ID of the organization's entire Asana workspace. Not relevant unless you're looking at multipke companies
+ 
+   - name: stg_asana_project_task
+    columns:
+      - name: project_id
+        description: Foreign key referencing the ID of the PROJECT
+        tests:
+          - not_null
+      - name: task_id
+        description: Foreign key referencing the ID of the TASK
+        tests:
+          - not_null
+
+  - name: stg_asana_section
+    columns:
+      - name: section_id
+        description: System-generated unique ID of the section
+        tests:
+          - unique
+          - not_null
+      - name: created_at
+        description: Timestamp of when the section was created
+      - name: section_name
+        description: User-facing name of the section.
+      - name: project_id
+        description: Foreign key referencing the id of the PROJECT the section lives in.
+
+  - name: stg_asana_story
+    columns:
+      - name: story_id
+        description: System generated unique ID of the story/action taken on a task.
+        tests:
+          - unique
+          - not_null
+      - name: created_at
+        description: Timestamp of when the story occurred.
+      - name: created_by_user_id
+        description: Foreign key referencing the USER who took the action
+      - name: target_task_id
+        description: Foreign key referncing the TASK that the action was taken on.
+        tests:
+          - not_null
+      - name: story_content
+        description: Free-form text that is either the content of a comment (event_type=comment) or the description of an action (event_type=system)
+      - name: event_type
+        description: The origin type of the story - a comment or change to the backend (altering a task somehow)
+
+  - name: stg_asana_tag
+    columns:
+      - name: tag_id
+        description: System generated unique ID of the tag
+        tests:
+          - unique
+          - not_null
+      - name: tag_name
+        description: User-facing name of the tag.
+      - name: created_at
+        descritpion: Timestamp of when the tag was created
+
+  - name: stg_asana_task
+    columns:
+      - name: task_id
+        description: System generated unique ID of the task
+        tests:
+          - unique
+          - not_null
+      - name: assignee_user_id
+        description: Foreign key referencing the USER that is currently assigned the task.
+      - name: assignee_status
+        description: Scheduling status for the assignee that the task is or will eventually be assigned to. This maps to the sections of "My Tasks"
+      - name: is_completed
+        description: Boolean that is true if the task is currently marked complete.
+      - name: completed_at
+        description: Timestamp of when the task was marked complete.
+      - name: completed_by_user_id
+        description: Foreign key referencing the USER who completed the task.
+      - name: created_at
+        description: Timestamp of when the task was created
+      - name: due_date
+        description: Date the task is due, if provided.
+      - name: modified_at
+        description: Timestamp of when the task was last modified
+      - name: task_name
+        description: User-facing name of the task.
+      - name: parent_task_id
+        description: Self-referential id of the parent TASK that this is a subtask of.
+      - name: start_date
+        description: The start date of the task, if a date range is given.
+      - name: task_description
+        description: Free-form text describing the task, as seen in the UI.
+      - name: workspace_id
+        description: ID of the organization's Asana workspace. Irrelevant unless working with multiple companies.
+      
+  - name: stg_asana_task_follower
+    columns:
+      - name: task_id
+        description: Foreign key referencing the ID of the TASK being followed.
+        tests:
+          - not_null
+      - name: user_id
+        description: Foreign key referencing the ID of the USER following the task.
+        tests:
+          - not_null
+
+  - name: stg_asana_task_section
+    columns:
+      - name: task_id
+        description: Foreign key referencing the ID of the TASK
+        tests:
+          - not_null
+      - name: section_id
+        description: Foreign key referencing the ID of the SECTION housing the task
+        tests:
+          - not_null
+
+  - name: stg_asana_task_tag
+    columns:
+      - name: tag_id
+        description: Foreign key referencing the ID of the TAG attached to the task
+        tests:
+          - not_null
+      - name: task_id
+        description: Foreign key referencing the ID of the TASK
+        tests:
+          - not_null
+
+  - name: stg_asana_team
+    columns:
+      - name: team_id
+        desctipion: System genereated unique ID for each team
+        tests:
+          - unique
+          - not_null
+      - name: team_name
+        description: User-facing name of the team
+
+  - name: stg_asana_user
+    columns:
+      - name: user_id
+        description: System generated unique ID for each user
+        tests:
+          - unique
+          - not_null
+      - name: email
+        description: The user's email
+      - name: user_name
+        description: The name of the user as it appears in the UI

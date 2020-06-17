@@ -44,9 +44,9 @@ sources:
             description: Foreign key referncing the USER assigned to this task (a task may not have an assignee)
           - name: assignee_status
             description: Scheduling status for the assignee that the task is or will eventually be assigned to. This maps to the sections of "My Tasks"
-            tests:
-              - accepted_values: # these should be the only options regardless of if there's an assignee or due date
-                  values: ['inbox', 'today', 'upcoming', 'later', 'new'] 
+            # tests: eh removing since this isn't important for any joins
+            #   - accepted_values: # these should be the only options regardless of if there's an assignee or due date
+            #       values: ['inbox', 'today', 'upcoming', 'later', 'new'] 
           - name: completed
             description: Boolean that's true if the task is *currently* marked completed. A task can be unmarked 
           - name: completed_at
