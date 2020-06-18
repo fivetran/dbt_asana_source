@@ -25,15 +25,13 @@ sources:
                 - not_null
           - name: email
             description: Email associated with the user
-            tests:
-              - not_null: # Asana notifications are by default also sent to the email
-                  severity: warn
           - name: name
             description: Given name for the user as it appears in the UI
               
 
       - name: task
         description: Table containing all tasks created
+        loaded_at_field: _fivetran_synced
         columns:
           - name: id
             description: System generated unique identifier for the task
@@ -44,9 +42,6 @@ sources:
             description: Foreign key referncing the USER assigned to this task (a task may not have an assignee)
           - name: assignee_status
             description: Scheduling status for the assignee that the task is or will eventually be assigned to. This maps to the sections of "My Tasks"
-            # tests: eh removing since this isn't important for any joins
-            #   - accepted_values: # these should be the only options regardless of if there's an assignee or due date
-            #       values: ['inbox', 'today', 'upcoming', 'later', 'new'] 
           - name: completed
             description: Boolean that's true if the task is *currently* marked completed. A task can be unmarked 
           - name: completed_at
@@ -92,7 +87,7 @@ sources:
               - not_null
           - name: current_status
             description: The most recent progress status update for the project. This is sent to all project followers
-          - name: due_date # deprecated -> asana suggests using due_on
+          - name: due_date
             description: The date the project is due 
           - name: modified_at
             description: The last time the project was updated. Does not include comments nor changes in associations (ie tasks)
@@ -110,6 +105,7 @@ sources:
 
       - name: story
         description: Table containing all stories -- stories are actions taken on tasks
+        loaded_at_field: _fivetran_synced
         columns:
           - name: id
             description: System generated unique ID of the story/action taken
@@ -125,10 +121,10 @@ sources:
           - name: target_id
             description: Foreign key referencing the TASK that the story is about.
             tests:
-              - not_null # every story should have an associated task 
+              - not_null
           - name: text
             description: Free-form text describing the action that was taken (if type = system), or the content of a comment (if type = comment)
-          - name: type # deprecated as of feb 2019 -> resource_subtype
+          - name: type
             description: The origin type of the story - a comment or change to the backend (altering a task)
 
 
@@ -227,8 +223,8 @@ sources:
             
 
       - name: task_section
-        description: Table relating tasks to the sections they belong to. Tasks without projects do not appear here, but sectionless tasks within a project do show up, in sections called (no section).
-        # does the description make sense?
+        description: The compact section records for all tasks within the given section. Applies to board view only.
+        freshness: null
         tests:
           - dbt_utils.unique_combination_of_columns:
                 combination_of_columns: 
