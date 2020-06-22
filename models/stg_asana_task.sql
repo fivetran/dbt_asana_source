@@ -7,7 +7,7 @@ with task as (
 
     select
       id as task_id,
-      assignee_id as assignee_user_id, -- I like how you added user to this name. I normally don't do that, but I do think it adds clarity. Let's adopt as a standard.
+      assignee_id as assignee_user_id,
       assignee_status,
       completed as is_completed,
       completed_at,
