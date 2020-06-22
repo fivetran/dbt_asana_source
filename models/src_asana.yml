@@ -210,6 +210,7 @@ sources:
               
       - name: task_tag
         description: Table of tasks with the tags attached to them. Tasks without tags (and vice versa) do not appear here.
+        freshness: null
         tests:
           - dbt_utils.unique_combination_of_columns:
                 combination_of_columns: 
@@ -223,7 +224,7 @@ sources:
             
 
       - name: task_section
-        description: The compact section records for all tasks within the given section. Applies to board view only.
+        description: The compact section records for all tasks within the given section. # TODO: find out if: Applies to board view only.
         freshness: null
         tests:
           - dbt_utils.unique_combination_of_columns:
