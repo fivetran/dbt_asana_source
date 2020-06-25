@@ -1,7 +1,7 @@
 version: 2
 
 sources:
-  - name: asana
+  - name: asana 
     database: "{{var ('asana_database', target.database)}}"
     schema: "{{var ('asana_schema', 'asana')}}"
 
