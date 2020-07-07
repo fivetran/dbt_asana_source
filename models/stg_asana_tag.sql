@@ -1,4 +1,4 @@
-with tag as (
+with asana_tag as (
 
     select *
     from {{ var('tag') }}
@@ -10,7 +10,7 @@ with tag as (
         name as tag_name,
         created_at
 
-    from tag
+    from asana_tag
     where not _fivetran_deleted
 )
 

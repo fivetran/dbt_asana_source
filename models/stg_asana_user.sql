@@ -1,4 +1,4 @@
-with user as (
+with asana_user as (
 
     select *
     from {{ var('user') }}
@@ -9,7 +9,7 @@ with user as (
       id as user_id,
       email,
       name as user_name
-    from user
+    from asana_user
     where not _fivetran_deleted
 )
 
