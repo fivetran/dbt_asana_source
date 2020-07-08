@@ -30,7 +30,7 @@ sources:
               
 
       - name: task
-        description: Table containing all tasks created
+        description: Table containing all created tasks
         loaded_at_field: _fivetran_synced
         columns:
           - name: id
@@ -39,11 +39,11 @@ sources:
               - unique
               - not_null
           - name: assignee_id
-            description: Foreign key referncing the USER assigned to this task (a task may not have an assignee)
+            description: Foreign key referencing the USER assigned to this task (note that a task may not have an assignee)
           - name: assignee_status
             description: Scheduling status for the assignee that the task is or will eventually be assigned to. This maps to the sections of "My Tasks"
           - name: completed
-            description: Boolean that's true if the task is *currently* marked completed. A task can be unmarked 
+            description: Boolean that's true if the task is *currently* marked completed. Note that a task can be unmarked complete
           - name: completed_at
             description: Timestamp of when the task was completed, if still currently completed.
           - name: completed_by_id
@@ -53,21 +53,21 @@ sources:
             tests:
               - not_null
           - name: due_on
-            description: The date on which the task is due. Not all tasks may have a due date
+            description: The date on which the task is due. Note that not tasks may not have a due date
           - name: due_at
             description: The date and time at which the task is due, only if a specific time is given. 
           - name: modified_at
-            description: The last time the task was updated. Does not include comments nor changes in associations (ie projects)
+            description: The last time the task was updated. Does not include comments nor changes in associations (ie their projects)
           - name: name
             description: The title of the task
           - name: notes
-            description: Free-form textual description of the task
+            description: Free-form textual description of the task (as seen in the UI)
           - name: parent_id
             description: The ID of the parent of the task, if it is a subtask. Self-refers to TASK
           - name: start_on
-            description: The start date of the task, if given with the due date. 
+            description: The start date of the task, if given with the due date 
           - name: workspace_id
-            description: The id of an organization's workspace in asana. Not necessary unless you have access to multiple asana workspaces.
+            description: The id of an organization's workspace in asana. Not necessary unless you have access to multiple organization's asanas.
 
 
       - name: project
@@ -81,6 +81,8 @@ sources:
               - not_null
           - name: archived
             description: Boolean representing whether the project has been archived (removed from asana UI)
+          - name: color
+            description: Color of the project as seen in the UI
           - name: created_at
             description: Timestamp of when the story was made/the action was logged
             tests:
@@ -90,14 +92,16 @@ sources:
           - name: due_date
             description: The date the project is due 
           - name: modified_at
-            description: The last time the project was updated. Does not include comments nor changes in associations (ie tasks)
+            description: The last time the project was updated. Does not include comments nor changes in associations (ie new tasks)
           - name: name
             description: The given name of the project
+          - name: notes
+            description: Free-form textual notes associated with the project.
           - name: owner_id
             description: Foreign key referencing the USER who owns the project.
           - name: public
             description: Boolean that is true if the project is public to the whole organization, false if not.
-          - name: team
+          - name: team_id
             description: Foreign key referencing the TEAM that the project is shared with.
           - name: workspace_id
             description: The id of an organization's workspace in asana. Not necessary unless you have access to multiple asana workspaces.
@@ -117,7 +121,7 @@ sources:
             tests:
               - not_null
           - name: created_by_id
-            description: Foreign key referencing the USER who created the story/took the action on the task. Sometimes null?
+            description: Foreign key referencing the USER who created the story/took the action on the task (sometimes null)
           - name: target_id
             description: Foreign key referencing the TASK that the story is about.
             tests:
@@ -125,7 +129,9 @@ sources:
           - name: text
             description: Free-form text describing the action that was taken (if type = system), or the content of a comment (if type = comment)
           - name: type
-            description: The origin type of the story - a comment or change to the backend (altering a task)
+            description: The origin type of the story - a comment or change to the backend/altering a task
+          - name: source
+            description: Where the story occurred (web, mobile, email, or api)
 
 
       - name: team
@@ -139,6 +145,8 @@ sources:
               - not_null
           - name: name
             description: Provided name for each team. There can be duplicates
+          - name: organization_id
+            description: Equivalent to the workspace_id, as organizations are a kind of workspace. Probably not relevant unless working with multiple orgs.
 
 
       - name: tag
@@ -153,9 +161,9 @@ sources:
           - name: name
             description: The name of the tag as it appears in the UI. There can be duplicates.
           - name: created_at
-            description: Time when the tag was created
-            tests:
-              - not_null
+            description: Timestamp of when the tag was created
+          - name: color
+            description: Chosen color of the tag as it appears in the UI
         
 
       - name: section
@@ -169,8 +177,6 @@ sources:
               - not_null
           - name: created_at
             description: Timestamp of when the section was created by a user
-            tests:
-              - not_null
           - name: name
             description: The given name of the section as it appears in the UI. Is stored as "(no section)" when this is the default bucket for sectionless tasks in a project
           - name: project_id
@@ -194,7 +200,7 @@ sources:
 
 
       - name: task_follower
-        description: Table of tasks with the users that are following them. 
+        description: Table of tasks with the users that are following them. Tasks without users do not appear here.
         freshness: null
         tests:
           - dbt_utils.unique_combination_of_columns:
@@ -224,7 +230,7 @@ sources:
             
 
       - name: task_section
-        description: The compact section records for all tasks within the given section. # TODO: find out if: Applies to board view only.
+        description: Table of tasks and the section that they live under. Section-less tasks within projects appear here, but project-less tasks do not
         freshness: null
         tests:
           - dbt_utils.unique_combination_of_columns:

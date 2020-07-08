@@ -16,7 +16,8 @@ with project as (
       owner_id as owner_user_id,
       public as is_public,
       team_id,
-      workspace_id
+      workspace_id,
+      notes
 
     from project
     where not _fivetran_deleted
