@@ -22,7 +22,3 @@ vars:
         task_tag: "{{ source('asana', 'task_tag') }}"
         section: "{{ source('asana', 'section') }}"
         task_section: "{{ source('asana', 'task_section') }}"
-
-
-# delete profile after testing
-profile: dev_bigquery_dbt_testing

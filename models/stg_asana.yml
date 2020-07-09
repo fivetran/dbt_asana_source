@@ -3,6 +3,7 @@ version: 2
 models:
 
   - name: stg_asana_project
+    description: Table containing all projects
     columns: 
       - name: project_id
         description: System-generated unique ID of the project
@@ -33,6 +34,7 @@ models:
         description: Free-form textual notes associated with the project.
  
   - name: stg_asana_project_task
+    description: Table of tasks and the project(s) they each belong to. If a project doesn't have a task, it won't be in here (and vice versa)
     columns:
       - name: project_id
         description: Foreign key referencing the ID of the PROJECT
@@ -44,6 +46,7 @@ models:
           - not_null
 
   - name: stg_asana_section
+    description: Table of all sections within projects. If tasks in a project are not in an explicit user-made section, a default section called "(no section)" is created here
     columns:
       - name: section_id
         description: System-generated unique ID of the section
@@ -58,6 +61,7 @@ models:
         description: Foreign key referencing the id of the PROJECT the section lives in.
 
   - name: stg_asana_story
+    description: Table containing all stories -- stories are actions taken on tasks
     columns:
       - name: story_id
         description: System generated unique ID of the story/action taken on a task.
@@ -78,6 +82,7 @@ models:
         description: The origin type of the story - a comment or change to the backend (ie altering a task somehow)
 
   - name: stg_asana_tag
+    description: Table of the custom tags made in the organization
     columns:
       - name: tag_id
         description: System generated unique ID of the tag
@@ -90,6 +95,7 @@ models:
         description: Timestamp of when the tag was created
 
   - name: stg_asana_task
+    description: Table containing all created tasks
     columns:
       - name: task_id
         description: System generated unique ID of the task
@@ -124,6 +130,7 @@ models:
         description: ID of the organization's Asana workspace. Irrelevant unless working with multiple companies.
       
   - name: stg_asana_task_follower
+    description: Table of tasks with the users that are following them. Tasks without users do not appear here.
     columns:
       - name: task_id
         description: Foreign key referencing the ID of the TASK being followed.
@@ -135,6 +142,7 @@ models:
           - not_null
 
   - name: stg_asana_task_section
+    description: Table of tasks and the section that they live under. Section-less tasks within projects appear here, but project-less tasks do not
     columns:
       - name: task_id
         description: Foreign key referencing the ID of the TASK
@@ -146,6 +154,7 @@ models:
           - not_null
 
   - name: stg_asana_task_tag
+    description: Table of tasks with the tags attached to them. Tasks without tags (and vice versa) do not appear here.
     columns:
       - name: tag_id
         description: Foreign key referencing the ID of the TAG attached to the task
@@ -157,6 +166,7 @@ models:
           - not_null
 
   - name: stg_asana_team
+    description: Table of the teams within the organization
     columns:
       - name: team_id
         description: System genereated unique ID for each team
@@ -167,6 +177,7 @@ models:
         description: User-facing name of the team
 
   - name: stg_asana_user
+    description: Table of all accounts in the organization
     columns:
       - name: user_id
         description: System generated unique ID for each user
