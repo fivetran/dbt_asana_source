@@ -10,7 +10,7 @@ with team as (
         name as team_name
 
     from team
-    where not _fivetran_deleted
+    where not coalesce(_fivetran_deleted, false)
 )
 
 select *

@@ -10,7 +10,7 @@ with asana_user as (
       email,
       name as user_name
     from asana_user
-    where not _fivetran_deleted
+    where not coalesce(_fivetran_deleted, false)
 )
 
 select *
