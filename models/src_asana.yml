@@ -31,7 +31,6 @@ sources:
 
       - name: task
         description: Table containing all created tasks
-        loaded_at_field: _fivetran_synced
         columns:
           - name: id
             description: System generated unique identifier for the task
@@ -109,7 +108,6 @@ sources:
 
       - name: story
         description: Table containing all stories -- stories are actions taken on tasks
-        loaded_at_field: _fivetran_synced
         columns:
           - name: id
             description: System generated unique ID of the story/action taken
