@@ -1,9 +1,9 @@
 config-version: 2
 
 name: 'asana_source'
-version: '0.0.1'
+version: '0.2.0'
 
-require-dbt-version: '>=0.17.0'
+require-dbt-version: '>=0.18.0'
 
 models:
     asana_source:
@@ -22,7 +22,3 @@ vars:
         task_tag: "{{ source('asana', 'task_tag') }}"
         section: "{{ source('asana', 'section') }}"
         task_section: "{{ source('asana', 'task_section') }}"
-
-
-# delete profile after testing
-profile: dev_bigquery_dbt_testing
