@@ -1,6 +1,6 @@
 # Asana 
 
-This package models Asana data from [Fivetran's connector](https://fivetran.com/docs/applications/asana). It uses data in the format described by [this ERD](https://docs.google.com/presentation/d/14m2L2aYGmt0IXseExR80FlEO-7fxjBKfoALR2jVh0G8/edit).
+This package models Asana data from [Fivetran's connector](https://fivetran.com/docs/applications/asana). It uses data in the format described by [this ERD](https://fivetran.com/docs/applications/asana#schemainformation).
 
 This package enriches your Fivetran data by doing the following:
 * Adds descriptions to tables and columns that are synced using Fivetran
@@ -35,6 +35,21 @@ vars:
     asana_database: your_database_name
     asana_schema: your_schema_name 
 ```
+
+### Changing the Build Schema
+By default this package will build the Asana staging models within a schema titled (<target_schema> + `_stg_asana`) in your target database. If this is not where you would like your Asana staging data to be written to, add the following configuration to your `dbt_project.yml` file:
+
+```yml
+# dbt_project.yml
+
+...
+models:
+    asana_source:
+      +schema: my_new_schema_name # leave blank for just the target_schema
+```
+
+## Database support
+This package is compatible with BigQuery, Snowflake, and Redshift.
 
 ## Contributions
 
