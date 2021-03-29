@@ -20,9 +20,6 @@ sources:
         columns:
           - name: id
             description: System generated unique ID for a user
-            tests:
-                - unique
-                - not_null
           - name: email
             description: Email associated with the user
           - name: name
@@ -34,9 +31,6 @@ sources:
         columns:
           - name: id
             description: System generated unique identifier for the task
-            tests:
-              - unique
-              - not_null
           - name: assignee_id
             description: Foreign key referencing the USER assigned to this task (note that a task may not have an assignee)
           - name: assignee_status
@@ -49,8 +43,6 @@ sources:
             description: Foreign key that references the USER who completed the task, if currently completed.
           - name: created_at
             description: Timestamp of when the task was first made
-            tests:
-              - not_null
           - name: due_on
             description: The date on which the task is due. Note that not tasks may not have a due date
           - name: due_at
@@ -75,17 +67,12 @@ sources:
         columns:
           - name: id
             description: System generated unique ID of the project
-            tests:
-              - unique
-              - not_null
           - name: archived
             description: Boolean representing whether the project has been archived (removed from asana UI)
           - name: color
             description: Color of the project as seen in the UI
           - name: created_at
             description: Timestamp of when the story was made/the action was logged
-            tests:
-              - not_null
           - name: current_status
             description: The most recent progress status update for the project. This is sent to all project followers
           - name: due_date
@@ -111,19 +98,12 @@ sources:
         columns:
           - name: id
             description: System generated unique ID of the story/action taken
-            tests:
-              - unique
-              - not_null
           - name: created_at
             description: Timestamp of when the story was made/the action was logged
-            tests:
-              - not_null
           - name: created_by_id
             description: Foreign key referencing the USER who created the story/took the action on the task (sometimes null)
           - name: target_id
             description: Foreign key referencing the TASK that the story is about.
-            tests:
-              - not_null
           - name: text
             description: Free-form text describing the action that was taken (if type = system), or the content of a comment (if type = comment)
           - name: type
@@ -138,9 +118,6 @@ sources:
         columns:
           - name: id
             description: System generated unique ID for each team
-            tests:
-              - unique
-              - not_null
           - name: name
             description: Provided name for each team. There can be duplicates
           - name: organization_id
@@ -153,9 +130,6 @@ sources:
         columns:
           - name: id
             description: System generated ID for each tag
-            tests:
-              - unique
-              - not_null
           - name: name
             description: The name of the tag as it appears in the UI. There can be duplicates.
           - name: created_at
@@ -170,41 +144,26 @@ sources:
         columns:
           - name: id
             description: System generated unique ID for each section
-            tests:
-              - unique
-              - not_null
           - name: created_at
             description: Timestamp of when the section was created by a user
           - name: name
-            description: The given name of the section as it appears in the UI. Is stored as "(no section)" when this is the default bucket for sectionless tasks in a project
+            description: The given name of the section as it appears in the UI. Is stored as "(no section)" when this is the default bucket for tasks with a section in a project
           - name: project_id
             description: Foreign key referencing the PROJECT that the section lives in
-            tests:
-              - not_null
 
       - name: project_task
         description: Table of tasks and the project(s) they each belong to. If a project doesn't have a task, it won't be in here (and vice versa)
         freshness: null
-        tests:
-          - dbt_utils.unique_combination_of_columns:
-                combination_of_columns: 
-                - project_id
-                - task_id
         columns:
           - name: project_id
             description: Foreign key referencing a PROJECT the task belongs to
           - name: task_id
-            description: Foreign key referncing the TASK in the project
+            description: Foreign key referencing the TASK in the project
 
 
       - name: task_follower
         description: Table of tasks with the users that are following them. Tasks without users do not appear here.
         freshness: null
-        tests:
-          - dbt_utils.unique_combination_of_columns:
-                combination_of_columns: 
-                - task_id
-                - user_id
         columns:
           - name: task_id
             description: Foreign key referencing the TASK being followed
@@ -215,11 +174,6 @@ sources:
       - name: task_tag
         description: Table of tasks with the tags attached to them. Tasks without tags (and vice versa) do not appear here.
         freshness: null
-        tests:
-          - dbt_utils.unique_combination_of_columns:
-                combination_of_columns: 
-                - task_id
-                - tag_id
         columns:
           - name: task_id
             description: Foreign key referencing the TASK that is tagged
@@ -230,11 +184,6 @@ sources:
       - name: task_section
         description: Table of tasks and the section that they live under. Section-less tasks within projects appear here, but project-less tasks do not
         freshness: null
-        tests:
-          - dbt_utils.unique_combination_of_columns:
-                combination_of_columns: 
-                - section_id
-                - task_id
         columns:
           - name: section_id
             description: Foreign key referencing the SECTION that the task lives under.
