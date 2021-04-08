@@ -36,6 +36,17 @@ vars:
     asana_schema: your_schema_name 
 ```
 
+To add addtional columns to tasks use the pass-through column variable.  This is useful for adding custom fields not already included in this package.
+
+```
+# dbt_project.yml
+
+...
+vars:
+  asana_source:
+    task_pass_through_columns: [custom_status, custom_department]
+```
+
 ### Changing the Build Schema
 By default this package will build the Asana staging models within a schema titled (<target_schema> + `_stg_asana`) in your target database. If this is not where you would like your Asana staging data to be written to, add the following configuration to your `dbt_project.yml` file:
 

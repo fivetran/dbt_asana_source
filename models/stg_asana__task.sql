@@ -15,7 +15,14 @@ fields as (
                 staging_columns=get_task_columns()
             )
         }}
-        
+
+        --The below script allows for pass through columns.
+        {% if var('task_pass_through_columns') %}
+        ,
+        {{ var('task_pass_through_columns') | join (", ") }}
+
+        {% endif %}
+
     from base
 ),
 
@@ -36,6 +43,14 @@ final as (
         start_on as start_date,
         notes as task_description,
         workspace_id
+
+        --The below script allows for pass through columns.
+        {% if var('task_pass_through_columns') %}
+        ,
+        {{ var('task_pass_through_columns') | join (", ") }}
+
+        {% endif %}
+
     from fields
 )
 
