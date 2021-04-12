@@ -36,7 +36,7 @@ vars:
     asana_schema: your_schema_name 
 ```
 
-To add addtional columns to tasks use the pass-through column variable.  This is useful for adding custom fields not already included in this package.
+To add additional columns to tasks use the pass-through column variable.  This is useful for adding custom fields not already included in this package.
 
 ```yml
 # dbt_project.yml
