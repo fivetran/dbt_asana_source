@@ -27,7 +27,7 @@ Include in your `packages.yml`
 ```yaml
 packages:
   - package: fivetran/asana_source
-    version: [">=0.5.1", "<0.6.0"]
+    version: [">=0.5.0", "<0.6.0"]
 ```
 
 ## Configuration
