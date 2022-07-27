@@ -33,8 +33,6 @@ sources:
             description: System generated unique identifier for the task
           - name: assignee_id
             description: Foreign key referencing the USER assigned to this task (note that a task may not have an assignee)
-          - name: assignee_status
-            description: Scheduling status for the assignee that the task is or will eventually be assigned to. This maps to the sections of "My Tasks"
           - name: completed
             description: Boolean that's true if the task is *currently* marked completed. Note that a task can be unmarked complete
           - name: completed_at
@@ -73,10 +71,6 @@ sources:
             description: Color of the project as seen in the UI
           - name: created_at
             description: Timestamp of when the story was made/the action was logged
-          - name: current_status
-            description: The most recent progress status update for the project. This is sent to all project followers
-          - name: due_date
-            description: The date the project is due 
           - name: modified_at
             description: The last time the project was updated. Does not include comments nor changes in associations (ie new tasks)
           - name: name
