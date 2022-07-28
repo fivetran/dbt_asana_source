@@ -1,3 +1,12 @@
+# dbt_asana_source v0.5.2
+## Deprecated columns fix
+- As per the Asana docs, this new version of the package removes deprecated columns from the Task and Project tables, the following files have been updated to reflect these changes:
+  - models/src_asana.yml
+  - macros/get_task_columns.sql
+  - macros/get_project_columns.sql
+  - models/stg_asana__task.sql
+  - models/stg_asana__project.sql
+
 # dbt_asana_source v0.5.1
 ## Under the Hood
 - Leveraged the `{{ dbt_utils.type_timestamp() }}` macro within the staging models for all timestamp fields. 
