@@ -41,6 +41,8 @@ final as (
         parent_id as parent_task_id,
         cast(start_on as {{ dbt_utils.type_timestamp() }}) as start_date,
         notes as task_description,
+        liked as is_liked,
+        num_likes as number_of_likes,
         workspace_id
 
         --The below script allows for pass through columns.

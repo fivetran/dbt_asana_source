@@ -6,6 +6,8 @@
     {"name": "archived", "datatype": "boolean"},
     {"name": "color", "datatype": dbt_utils.type_string()},
     {"name": "created_at", "datatype": dbt_utils.type_timestamp()},
+    {"name": "current_status", "datatype": dbt_utils.type_string()},
+    {"name": "due_date", "datatype": dbt_utils.type_timestamp()},
     {"name": "id", "datatype": dbt_utils.type_string()},
     {"name": "modified_at", "datatype": dbt_utils.type_timestamp()},
     {"name": "name", "datatype": dbt_utils.type_string()},

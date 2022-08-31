@@ -13,6 +13,8 @@
     {"name": "modified_at", "datatype": dbt_utils.type_timestamp()},
     {"name": "name", "datatype": dbt_utils.type_string()},
     {"name": "notes", "datatype": dbt_utils.type_string()},
+    {"name": "liked", "datatype": "boolean"},
+    {"name": "num_likes", "datatype": dbt_utils.type_int()},
     {"name": "parent_id", "datatype": dbt_utils.type_string()},
     {"name": "start_on", "datatype": dbt_utils.type_timestamp()},
     {"name": "workspace_id", "datatype": dbt_utils.type_string()}
