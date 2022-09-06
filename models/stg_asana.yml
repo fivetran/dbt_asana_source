@@ -126,6 +126,10 @@ models:
         description: The start date of the task, if a date range is given.
       - name: task_description
         description: Free-form text describing the task, as seen in the UI.
+      - name: is_liked
+        description: A boolean that's true if the task has been liked.
+      - name: number_of_likes
+        description: An integer indicating the number of likes on a task.
       - name: workspace_id
         description: ID of the organization's Asana workspace. Irrelevant unless working with multiple companies.
       
