@@ -1,6 +1,7 @@
 # dbt_asana_source v0.5.2
 - PostgreSQL compatibility 🎉
 - Updated README for enhanced user experience
+- Add source identifiers to give users more dynamic flexibility
 # dbt_asana_source v0.5.1
 ## Under the Hood
 - Leveraged the `{{ dbt_utils.type_timestamp() }}` macro within the staging models for all timestamp fields. 
