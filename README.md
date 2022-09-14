@@ -57,7 +57,7 @@ vars:
 ### Passing Through Additional Metrics 
 If you would like to pass through additional metrics to the staging models, add the below configurations to your `dbt_project.yml` file. This is useful for adding custom fields not already included in this package.
 
->**Note** Please ensure you exercise due diligence when adding metrics to these models. The metrics added by default have been vetted by the Fivetran team maintaining this package for accuracy. There are metrics included within the source reports, for example metric averages, which may be inaccurately represented at the grain for reports created in this package. You will want to ensure whichever metrics you pass through are indeed appropriate to aggregate at the respective reporting levels provided in this package.
+>**Note** Please exercise due diligence when adding metrics to these models. The metrics added by default have been vetted by the Fivetran team maintaining this package for accuracy. There are metrics included within the source reports, for example metric averages, which may be inaccurately represented at the grain for reports created in this package. You will want to ensure whichever metrics you pass through are indeed appropriate to aggregate at the respective reporting levels provided in this package.
 
 ```yml
 vars:
@@ -66,7 +66,7 @@ vars:
 ```
 
 ### Changing the Build Schema
-By default this package will build the Asana staging models within a schema titled (<target_schema> + `_stg_asana`) in your destination. If this is not where you would like your Asana staging data to be written to, add the following configuration to your `dbt_project.yml` file:
+By default this package will build the Asana staging models within a schema titled (<target_schema> + `_stg_asana`) in your destination. If this is not where you would like your Asana staging data to be written to, add the following configuration to your root `dbt_project.yml` file:
 
 ```yml
 models:
@@ -103,6 +103,6 @@ A small team of analytics engineers at Fivetran develops these dbt packages. How
 We highly encourage and welcome contributions to this package. Check out [this dbt Discourse article](https://discourse.getdbt.com/t/contributing-to-a-dbt-package/657) to learn how to contribute to a dbt package!
 
 # 🏪 Are there any resources available?
-- If you have questions or want to reach out for help, please refer to the [GitHub Issue](https://github.com/fivetran/dbt_microsoft_ads_source/issues/new/choose) section to find the right avenue of support for you.
+- If you have questions or want to reach out for help, please refer to the [GitHub Issue](https://github.com/fivetran/dbt_asana_source/issues/new/choose) section to find the right avenue of support for you.
 - If you would like to provide feedback to the dbt package team at Fivetran or would like to request a new dbt package, fill out our [Feedback Form](https://www.surveymonkey.com/r/DQ7K7WW).
-- Have questions or want to just say hi? Book a time during our office hours [on Calendly](https://calendly.com/fivetran-solutions-team/fivetran-solutions-team-office-hours) or email us at solutions@fivetran.com.
+- Have questions or just want to say hi? Book a time during our office hours [on Calendly](https://calendly.com/fivetran-solutions-team/fivetran-solutions-team-office-hours) or email us at solutions@fivetran.com.
