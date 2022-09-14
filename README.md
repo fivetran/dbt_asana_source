@@ -55,16 +55,11 @@ vars:
 <details><summary>Expand for configurations</summary>
 
 ### Passing Through Additional Metrics 
-To add additional columns to tasks use the pass-through column variable.  This is useful for adding custom fields not already included in this package.
+If you would like to pass through additional metrics to the staging models, add the below configurations to your `dbt_project.yml` file. This is useful for adding custom fields not already included in this package.
 
-By default, this package will select `projects`, `impressions`, and `cost` from the source reporting tables to store into the staging models. If you would like to pass through additional metrics to the staging models, add the below configurations to your `dbt_project.yml` file. These variables allow for the pass-through fields to be aliased (`alias`) if desired, but not required. Use the below format for declaring the respective pass-through variables:
-
->**Note** Please ensure you exercised due diligence when adding metrics to these models. The metrics added by default (taps, impressions, and spend) have been vetted by the Fivetran team maintaining this package for accuracy. There are metrics included within the source reports, for example metric averages, which may be inaccurately represented at the grain for reports created in this package. You will want to ensure whichever metrics you pass through are indeed appropriate to aggregate at the respective reporting levels provided in this package.
+>**Note** Please ensure you exercised due diligence when adding metrics to these models. The metrics added by default have been vetted by the Fivetran team maintaining this package for accuracy. There are metrics included within the source reports, for example metric averages, which may be inaccurately represented at the grain for reports created in this package. You will want to ensure whichever metrics you pass through are indeed appropriate to aggregate at the respective reporting levels provided in this package.
 
 ```yml
-# dbt_project.yml
-
-...
 vars:
   asana_source:
     task_pass_through_columns: [custom_status, custom_department]
