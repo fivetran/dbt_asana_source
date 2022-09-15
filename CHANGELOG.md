@@ -1,4 +1,5 @@
 # dbt_asana_source v0.5.2
+PR [#24](https://github.com/fivetran/dbt_asana_source/pull/24) introduced the following updates.
 - PostgreSQL compatibility 🎉
 - Updated README for enhanced user experience
 - Add source identifiers to give users more dynamic flexibility
