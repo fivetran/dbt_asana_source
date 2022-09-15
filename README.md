@@ -14,10 +14,6 @@
 # 📣 What does this dbt package do?
 - Materializes [Asana staging tables](https://fivetran.github.io/dbt_asana_source/#!/overview/asana_source/models/?g_v=1&g_e=seeds), which leverage data in the format described by [this ERD](https://fivetran.com/docs/applications/asana#schemainformation). These staging tables clean, test, and prepare your Asana data from [Fivetran's connector](https://fivetran.com/docs/applications/asana) for analysis by doing the following:
   - Names columns for consistency across all packages and for easier analysis
-    * Boolean fields are prefixed with `is_` or `has_`
-    * Timestamps are appended with `_at`
-    * ID primary keys are prefixed with the name of the table.  For example, the user table's ID column is renamed user_id.
-    * Foreign keys include the table that they refer to. For example, the project table's owner ID column is renamed owner_user_id.
   - Removes any rows that are soft-deleted
   - Adds freshness tests to source data
   - Adds column-level testing where applicable. For example, all primary keys are tested for uniqueness and non-null values.
