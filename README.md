@@ -50,7 +50,7 @@ vars:
 ## (Optional) Step 4: Additional configurations
 <details><summary>Expand for configurations</summary>
 
-### Passing Through Additional Metrics 
+### Passing Through Additional Columns 
 To add additional columns to tasks use the pass-through column variable. This is useful for adding custom fields not already included in this package.
 
 ```yml
