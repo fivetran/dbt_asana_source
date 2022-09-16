@@ -33,7 +33,7 @@ Include the following asana_source package version in your `packages.yml` file.
 ```yaml
 packages:
   - package: fivetran/asana_source
-    version: [">=0.5.0", "<0.6.0"]
+    version: [">=0.6.0", "<0.7.0"]
 ```
 
 ## Step 3: Define database and schema variables
