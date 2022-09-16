@@ -35,8 +35,6 @@ sources:
             description: System generated unique identifier for the task
           - name: assignee_id
             description: Foreign key referencing the USER assigned to this task (note that a task may not have an assignee)
-          - name: assignee_status
-            description: Scheduling status for the assignee that the task is or will eventually be assigned to. This maps to the sections of "My Tasks"
           - name: completed
             description: Boolean that's true if the task is *currently* marked completed. Note that a task can be unmarked complete
           - name: completed_at
@@ -54,7 +52,11 @@ sources:
           - name: name
             description: The title of the task
           - name: notes
-            description: Free-form textual description of the task (as seen in the UI)
+            description: Free-form textual description of the task (as seen in the UI).
+          - name: liked
+            description: A boolean that's true if the task has been liked.
+          - name: num_likes
+            description: An integer indicating the number of likes on a task.
           - name: parent_id
             description: The ID of the parent of the task, if it is a subtask. Self-refers to TASK
           - name: start_on
@@ -69,21 +71,21 @@ sources:
         freshness: null
         columns:
           - name: id
-            description: System generated unique ID of the project
+            description: System generated unique ID of the project.
           - name: archived
-            description: Boolean representing whether the project has been archived (removed from asana UI)
+            description: Boolean representing whether the project has been archived (removed from asana UI).
           - name: color
-            description: Color of the project as seen in the UI
+            description: Color of the project as seen in the UI.
           - name: created_at
-            description: Timestamp of when the story was made/the action was logged
+            description: Timestamp of when the story was made/the action was logged.
           - name: current_status
-            description: The most recent progress status update for the project. This is sent to all project followers
+            description: The most recent progress status update for the project. This is sent to all project followers.
           - name: due_date
-            description: The date the project is due 
+            description: The date the project is due.
           - name: modified_at
-            description: The last time the project was updated. Does not include comments nor changes in associations (ie new tasks)
+            description: The last time the project was updated. Does not include comments nor changes in associations (ie new tasks).
           - name: name
-            description: The given name of the project
+            description: The given name of the project.
           - name: notes
             description: Free-form textual notes associated with the project.
           - name: owner_id
