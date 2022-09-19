@@ -15,6 +15,7 @@ sources:
 
     tables:
       - name: user
+        identifier: "{{ var('asana_user_identifier', 'user')}}"
         description: Table of all accounts in the organization
         freshness: null
         columns:
@@ -27,14 +28,13 @@ sources:
               
 
       - name: task
+        identifier: "{{ var('asana_task_identifier', 'task')}}"
         description: Table containing all created tasks
         columns:
           - name: id
             description: System generated unique identifier for the task
           - name: assignee_id
             description: Foreign key referencing the USER assigned to this task (note that a task may not have an assignee)
-          - name: assignee_status
-            description: Scheduling status for the assignee that the task is or will eventually be assigned to. This maps to the sections of "My Tasks"
           - name: completed
             description: Boolean that's true if the task is *currently* marked completed. Note that a task can be unmarked complete
           - name: completed_at
@@ -52,7 +52,11 @@ sources:
           - name: name
             description: The title of the task
           - name: notes
-            description: Free-form textual description of the task (as seen in the UI)
+            description: Free-form textual description of the task (as seen in the UI).
+          - name: liked
+            description: A boolean that's true if the task has been liked.
+          - name: num_likes
+            description: An integer indicating the number of likes on a task.
           - name: parent_id
             description: The ID of the parent of the task, if it is a subtask. Self-refers to TASK
           - name: start_on
@@ -62,25 +66,26 @@ sources:
 
 
       - name: project
+        identifier: "{{ var('asana_project_identifier', 'project')}}"
         description: Table containing all projects
         freshness: null
         columns:
           - name: id
-            description: System generated unique ID of the project
+            description: System generated unique ID of the project.
           - name: archived
-            description: Boolean representing whether the project has been archived (removed from asana UI)
+            description: Boolean representing whether the project has been archived (removed from asana UI).
           - name: color
-            description: Color of the project as seen in the UI
+            description: Color of the project as seen in the UI.
           - name: created_at
-            description: Timestamp of when the story was made/the action was logged
+            description: Timestamp of when the story was made/the action was logged.
           - name: current_status
-            description: The most recent progress status update for the project. This is sent to all project followers
+            description: The most recent progress status update for the project. This is sent to all project followers.
           - name: due_date
-            description: The date the project is due 
+            description: The date the project is due.
           - name: modified_at
-            description: The last time the project was updated. Does not include comments nor changes in associations (ie new tasks)
+            description: The last time the project was updated. Does not include comments nor changes in associations (ie new tasks).
           - name: name
-            description: The given name of the project
+            description: The given name of the project.
           - name: notes
             description: Free-form textual notes associated with the project.
           - name: owner_id
@@ -94,6 +99,7 @@ sources:
 
 
       - name: story
+        identifier: "{{ var('asana_story_identifier', 'story')}}"
         description: Table containing all stories -- stories are actions taken on tasks
         columns:
           - name: id
@@ -113,6 +119,7 @@ sources:
 
 
       - name: team
+        identifier: "{{ var('asana_team_identifier', 'team')}}"
         description: Table of the teams within the organization
         freshness: null
         columns:
@@ -125,6 +132,7 @@ sources:
 
 
       - name: tag
+        identifier: "{{ var('asana_tag_identifier', 'tag')}}"
         description: Table of the custom tags made in the organization
         freshness: null
         columns:
@@ -139,6 +147,7 @@ sources:
         
 
       - name: section
+        identifier: "{{ var('asana_section_identifier', 'section')}}"
         description: Table of all sections within projects. If tasks in a project are not in an explicit user-made section, a default section called "(no section)" is created here
         freshness: null
         columns:
@@ -152,6 +161,7 @@ sources:
             description: Foreign key referencing the PROJECT that the section lives in
 
       - name: project_task
+        identifier: "{{ var('asana_project_task_identifier', 'project_task')}}"
         description: Table of tasks and the project(s) they each belong to. If a project doesn't have a task, it won't be in here (and vice versa)
         freshness: null
         columns:
@@ -162,6 +172,7 @@ sources:
 
 
       - name: task_follower
+        identifier: "{{ var('asana_task_follower_identifier', 'task_follower')}}"
         description: Table of tasks with the users that are following them. Tasks without users do not appear here.
         freshness: null
         columns:
@@ -172,6 +183,7 @@ sources:
 
               
       - name: task_tag
+        identifier: "{{ var('asana_task_tag_identifier', 'task_tag')}}"
         description: Table of tasks with the tags attached to them. Tasks without tags (and vice versa) do not appear here.
         freshness: null
         columns:
@@ -182,6 +194,7 @@ sources:
             
 
       - name: task_section
+        identifier: "{{ var('asana_task_section_identifier', 'task_section')}}"
         description: Table of tasks and the section that they live under. Section-less tasks within projects appear here, but project-less tasks do not
         freshness: null
         columns:

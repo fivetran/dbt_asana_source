@@ -31,7 +31,6 @@ final as (
     select 
         id as task_id,
         assignee_id as assignee_user_id,
-        assignee_status,
         completed as is_completed,
         cast(completed_at as {{ dbt_utils.type_timestamp() }}) as completed_at,
         completed_by_id as completed_by_user_id,
@@ -42,6 +41,8 @@ final as (
         parent_id as parent_task_id,
         cast(start_on as {{ dbt_utils.type_timestamp() }}) as start_date,
         notes as task_description,
+        liked as is_liked,
+        num_likes as number_of_likes,
         workspace_id
 
         --The below script allows for pass through columns.
