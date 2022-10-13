@@ -24,7 +24,7 @@ final as (
     select 
         id as tag_id,
         name as tag_name,
-        cast(created_at as {{ dbt_utils.type_timestamp() }}) as created_at
+        cast(created_at as {{ dbt.type_timestamp() }}) as created_at
     from fields
     where not _fivetran_deleted
 )
