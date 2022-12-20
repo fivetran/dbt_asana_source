@@ -24,10 +24,10 @@ final as (
     select 
         id as project_id,
         archived as is_archived,
-        cast(created_at as {{ dbt_utils.type_timestamp() }}) as created_at,
+        cast(created_at as {{ dbt.type_timestamp() }}) as created_at,
         current_status,
-        cast(due_date as {{ dbt_utils.type_timestamp() }}) as due_date,
-        cast(modified_at as {{ dbt_utils.type_timestamp() }}) as modified_at,
+        cast(due_date as {{ dbt.type_timestamp() }}) as due_date,
+        cast(modified_at as {{ dbt.type_timestamp() }}) as modified_at,
         name as project_name,
         owner_id as owner_user_id,
         public as is_public,
