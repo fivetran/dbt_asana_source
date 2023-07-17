@@ -1,7 +1,7 @@
 
 with base as (
 
-    select *
+    select * 
     from {{ ref('stg_asana__task_tmp') }}
 
 ),
