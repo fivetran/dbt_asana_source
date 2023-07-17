@@ -33,7 +33,6 @@ models:
       - name: notes
         description: Free-form textual notes associated with the project.
 
-
   - name: stg_asana__project_task
     description: Table of tasks and the project(s) they each belong to. If a project doesn't have a task, it won't be in here (and vice versa)
     columns:
@@ -63,7 +62,6 @@ models:
       - name: project_id
         description: Foreign key referencing the id of the PROJECT the section lives in.
 
-
   - name: stg_asana__story
     description: Table containing all stories -- stories are actions taken on tasks
     columns:
@@ -85,7 +83,6 @@ models:
       - name: event_type
         description: The origin type of the story - a comment or change to the backend (ie altering a task somehow)
 
-
   - name: stg_asana__tag
     description: Table of the custom tags made in the organization
     columns:
@@ -98,7 +95,6 @@ models:
         description: User-facing name of the tag.
       - name: created_at
         description: Timestamp of when the tag was created
-
 
   - name: stg_asana__task
     description: Table containing all created tasks
@@ -139,7 +135,6 @@ models:
       - name: workspace_id
         description: ID of the organization's Asana workspace. Irrelevant unless working with multiple companies.
 
-
   - name: stg_asana__task_follower
     description: Table of tasks with the users that are following them. Tasks without users do not appear here.
     columns:
@@ -151,7 +146,6 @@ models:
         description: Foreign key referencing the ID of the USER following the task.
         tests:
           - not_null
-
 
   - name: stg_asana__task_section
     description: Table of tasks and the section that they live under. Section-less tasks within projects appear here, but project-less tasks do not
@@ -165,7 +159,6 @@ models:
         tests:
           - not_null
 
-
   - name: stg_asana__task_tag
     description: Table of tasks with the tags attached to them. Tasks without tags (and vice versa) do not appear here.
     columns:
@@ -178,7 +171,6 @@ models:
         tests:
           - not_null
 
-
   - name: stg_asana__team
     description: Table of the teams within the organization
     columns:
@@ -189,7 +181,6 @@ models:
           - not_null
       - name: team_name
         description: User-facing name of the team
-
 
   - name: stg_asana__user
     description: Table of all accounts in the organization
