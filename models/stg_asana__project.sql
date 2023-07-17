@@ -33,8 +33,7 @@ final as (
         public as is_public,
         team_id,
         workspace_id,
-        notes,
-        row_number() over (partition by id order by _fivetran_synced desc) = 1 as is_most_recent_record
+        notes
     from fields
 )
 

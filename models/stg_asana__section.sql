@@ -25,8 +25,7 @@ final as (
         id as section_id,
         cast(created_at as {{ dbt.type_timestamp() }}) as created_at,
         name as section_name,
-        project_id,
-        row_number() over (partition by id order by _fivetran_synced desc) = 1 as is_most_recent_record
+        project_id
     from fields
 )
 

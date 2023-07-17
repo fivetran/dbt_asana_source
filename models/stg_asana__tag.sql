@@ -24,8 +24,7 @@ final as (
     select 
         id as tag_id,
         name as tag_name,
-        cast(created_at as {{ dbt.type_timestamp() }}) as created_at,
-        row_number() over (partition by id order by _fivetran_synced desc) = 1 as is_most_recent_record
+        cast(created_at as {{ dbt.type_timestamp() }}) as created_at
     from fields
     where not _fivetran_deleted
 )

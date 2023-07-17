@@ -43,8 +43,7 @@ final as (
         notes as task_description,
         liked as is_liked,
         num_likes as number_of_likes,
-        workspace_id,
-        row_number() over (partition by id order by _fivetran_synced desc) = 1 as is_most_recent_record
+        workspace_id
 
         --The below script allows for pass through columns.
         {% if var('task_pass_through_columns') %}
