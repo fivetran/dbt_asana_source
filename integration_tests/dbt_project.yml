@@ -3,7 +3,7 @@ name: 'asana_source_integration_tests'
 version: 0.8.1
 profile: 'integration_tests'
 vars:
-  asana_schema: asana_source_integrations_tests_02
+  asana_schema: asana_source_integrations_tests_03
   asana_source:
     asana_user_identifier: "user_data"
     asana_project_identifier: "project_data"
@@ -20,7 +20,7 @@ seeds:
   +quote_columns: "{{ true if target.type == 'redshift' else false }}"
   asana_source_integration_tests:
     +column_types:
-      _fivetran_synced: timestamp
+      _fivetran_synced: "timestamp"
     user_data:
       +column_types:
         id: "{{ 'int64' if target.type == 'bigquery' else 'bigint' }}"
