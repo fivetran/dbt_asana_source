@@ -27,7 +27,8 @@ final as (
         created_by_id as created_by_user_id,
         target_id as target_task_id,
         text as story_content,
-        type as event_type
+        type as event_type,
+        row_number() over (partition by id order by _fivetran_synced desc) = 1 as is_most_recent_record
     from fields
 )
 

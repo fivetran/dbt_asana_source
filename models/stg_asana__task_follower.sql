@@ -23,7 +23,9 @@ final as (
     
     select 
         task_id,
-        user_id
+        user_id,
+        row_number() over (partition by task_id, user_id 
+            order by _fivetran_synced desc) = 1 as is_most_recent_record
     from fields
 )
 

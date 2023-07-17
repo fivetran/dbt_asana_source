@@ -24,7 +24,8 @@ final as (
     select 
         id as user_id,
         email,
-        name as user_name
+        name as user_name,
+        row_number() over (partition by id order by _fivetran_synced desc) = 1 as is_most_recent_record
     from fields
     where not coalesce(_fivetran_deleted, false)
 )

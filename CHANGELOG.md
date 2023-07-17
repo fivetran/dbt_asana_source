@@ -1,3 +1,6 @@
+# dbt_asana_source v0.8.1
+## 🎉 Feature Update 🎉
+- In the staging models, a new field called `is_most_recent_record` has been introduced. This field is true if it has the most recent `_fivetran_synced` value. ([#33](https://github.com/fivetran/dbt_asana_source/pull/33))
 # dbt_asana_source v0.8.0
 ## 🎉 Feature Update 🎉
 - Databricks compatibility! ([#30](https://github.com/fivetran/dbt_asana_source/pull/30))
