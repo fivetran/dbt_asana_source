@@ -13,10 +13,10 @@
 # Asana Source dbt Package ([Docs](https://fivetran.github.io/dbt_asana_source/))
 ## What does this dbt package do?
 - Materializes [Asana staging tables](https://fivetran.github.io/dbt_asana_source/#!/overview/asana_source/models/?g_v=1&g_e=seeds), which leverage data in the format described by [this ERD](https://fivetran.com/docs/applications/asana#schemainformation). These staging tables clean, test, and prepare your Asana data from [Fivetran's connector](https://fivetran.com/docs/applications/asana) for analysis by doing the following:
-- Names columns for consistency across all packages and for easier analysis
-- Removes any rows that are soft-deleted
-- Adds freshness tests to source data
-- Adds column-level testing where applicable. For example, all primary keys are tested for uniqueness and non-null values.
+  - Names columns for consistency across all packages and for easier analysis
+  - Removes any rows that are soft-deleted
+  - Adds freshness tests to source data
+  - Adds column-level testing where applicable. For example, all primary keys are tested for uniqueness and non-null values.
 - Generates a comprehensive data dictionary of your Asana data through the [dbt docs site](https://fivetran.github.io/dbt_asana_source/).
 - These tables are designed to work simultaneously with our [Asana transformation package](https://github.com/fivetran/dbt_asana).
 
