@@ -24,7 +24,7 @@
 ### Step 1: Prerequisites
 To use this dbt package, you must have the following:
 
-- At least one Fivetran Asana connector syncing data into your destination.
+- At least one Fivetran Asana connection syncing data into your destination.
 - A **BigQuery**, **Snowflake**, **Redshift**, **PostgreSQL**, or **Databricks** destination.
 
 ### Step 2: Install the package (skip if also using the `asana` transformation package)

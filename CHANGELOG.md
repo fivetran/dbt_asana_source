@@ -1,3 +1,8 @@
+# dbt_asana_source version.version
+
+## Documentation
+- Corrected references to connectors and connections in the README. ([#36](https://github.com/fivetran/dbt_asana_source/pull/36))
+
 # dbt_asana_source v0.8.0
 ## 🎉 Feature Update 🎉
 - Databricks compatibility! ([#30](https://github.com/fivetran/dbt_asana_source/pull/30))
