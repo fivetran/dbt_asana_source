@@ -1,8 +1,8 @@
 {% macro get_story_columns() %}
 
 {% set columns = [
-    {"name": "_fivetran_synced", "datatype": dbt.type_timestamp()},
-    {"name": "created_at", "datatype": dbt.type_timestamp()},
+    {"name": "_fivetran_synced", "datatype": dbt.timestamp()},
+    {"name": "created_at", "datatype": dbt.timestamp()},
     {"name": "created_by_id", "datatype": dbt.type_string()},
     {"name": "hearted", "datatype": "boolean"},
     {"name": "id", "datatype": dbt.type_string()},
