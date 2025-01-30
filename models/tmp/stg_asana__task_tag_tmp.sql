@@ -1,4 +1,4 @@
-{% if var('using_asana__task_tag', asana_source.does_table_exist('task_tag')) %}
+{% if var('using_asana__task_tags', asana_source.does_table_exist('task_tag')) %}
 
 select * 
 from {{ var('task_tag') }}

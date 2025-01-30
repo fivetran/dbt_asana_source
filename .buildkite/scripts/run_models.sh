@@ -20,7 +20,7 @@ dbt seed --target "$db" --full-refresh
 dbt run --target "$db" --full-refresh
 dbt test --target "$db"
 
-dbt run --vars '{using_asana_tag: false, using_asana_task_tag: false}' --target "$db" --full-refresh
+dbt run --vars '{using_asana_tags: false, using_asana_task_tags: false}' --target "$db" --full-refresh
 dbt test --target "$db"
 
 dbt run-operation fivetran_utils.drop_schemas_automation --target "$db"

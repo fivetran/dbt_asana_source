@@ -1,4 +1,4 @@
-{% if var('using_asana__tag', asana_source.does_table_exist('tag')) %}
+{% if var('using_asana__tags', asana_source.does_table_exist('tag')) %}
 
 select * 
 from {{ var('tag') }}

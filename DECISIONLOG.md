@@ -8,6 +8,6 @@ The below variables control the respective behaviors and may be overridden if de
 
 ```yml
 vars:
-  using_asana__tag: false ## Dynamically checks the source at runtime to set as either true or false. May be overridden using this variable if desired.
-  using_asana__task_tag: false ## Dynamically checks the source at runtime to set as either true or false. May be overridden using this variable if desired.
+  using_asana_tags: false ## Dynamically checks the source at runtime to set as either true or false. May be overridden using this variable if desired.
+  using_asana_task_tags: false ## Dynamically checks the source at runtime to set as either true or false. May be overridden using this variable if desired.
 ```
