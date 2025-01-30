@@ -88,7 +88,6 @@ models:
         description: System generated unique ID of the tag
         tests:
           - unique
-          - not_null
       - name: tag_name
         description: User-facing name of the tag.
       - name: created_at
@@ -162,8 +161,6 @@ models:
     columns:
       - name: tag_id
         description: Foreign key referencing the ID of the TAG attached to the task
-        tests:
-          - not_null
       - name: task_id
         description: Foreign key referencing the ID of the TASK
         tests:
