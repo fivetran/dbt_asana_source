@@ -3,7 +3,7 @@ name: 'asana_source_integration_tests'
 version: 0.8.0
 profile: 'integration_tests'
 vars:
-  asana_schema: asana_source_integrations_tests_02
+  asana_schema: asana_source_integrations_tests_02a
   asana_source:
     asana_user_identifier: "user_data"
     asana_project_identifier: "project_data"
@@ -16,6 +16,10 @@ vars:
     asana_task_tag_identifier: "task_tag_data"
     asana_section_identifier: "section_data"
     asana_task_section_identifier: "task_section_data"
+
+  using_asana__tag: false
+  using_asana__task_tag: false
+
 seeds:
   +quote_columns: "{{ true if target.type == 'redshift' else false }}"
   asana_source_integration_tests:
