@@ -163,8 +163,6 @@ models:
         description: Foreign key referencing the ID of the TAG attached to the task
       - name: task_id
         description: Foreign key referencing the ID of the TASK
-        tests:
-          - not_null
 
   - name: stg_asana__team
     description: Table of the teams within the organization

@@ -1,3 +1,4 @@
+{% if var('using_asana_tag', asana_source.does_table_exist('tag')) %}
 
 with base as (
 
