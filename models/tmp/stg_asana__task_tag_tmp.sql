@@ -1,11 +1,11 @@
-{% if var('using_asana__task_tags', asana_source.does_table_exist('task_tag')) %}
+{% if var('using_asana_task_tags', asana_source.does_table_exist('task_tag')) %}
 
 select * 
 from {{ var('task_tag') }}
 
 {% else %}
 
-select 
+select
     cast(null as {{ dbt.type_string() }}) as tag_id,
     cast(null as {{ dbt.type_string() }}) as task_id
 limit {{ '1' if target.type == 'redshift' else '0' }} 

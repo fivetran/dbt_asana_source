@@ -1,11 +1,11 @@
-{% if var('using_asana__tags', asana_source.does_table_exist('tag')) %}
+{% if var('using_asana_tags', asana_source.does_table_exist('tag')) %}
 
 select * 
 from {{ var('tag') }}
 
 {% else %}
 
-select 
+select
     cast(null as {{ dbt.type_string() }}) as id,
     cast(null as {{ dbt.type_string() }}) as name,
     cast(null as {{ dbt.type_timestamp() }}) as created_at
