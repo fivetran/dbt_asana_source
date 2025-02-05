@@ -1,8 +1,12 @@
 # dbt_asana_source v0.9.0
+This release introduces the following updates.
 
 ## Breaking Changes
-- Introduces variables `asana__using_tags` and `asana__using_task_tags` to disable the `stg_asana__tag` and `stg_asana__task_tag` models respectively. This allows the downstream models to run even if the respective source `tag` and `task_tag` tables don't exist. For more information on how to configure refer to the [README](https://github.com/fivetran/dbt_asana_source/blob/main/README.md#step-4-enablingdisabling-models).
+- Introduces variables `asana__using_tags` and `asana__using_task_tags` to disable the `stg_asana__tag` and `stg_asana__task_tag` models respectively. This allows the downstream models to run even if the respective source `tag` and `task_tag` tables don't exist. ([#37](https://github.com/fivetran/dbt_asana_source/pull/37))
+  - For more information on how to configure these variables, refer to the [README](https://github.com/fivetran/dbt_asana_source/blob/main/README.md#step-4-enablingdisabling-models).
 
+## Under the Hood
+- Added False configurations for `asana__using_tags` and `asana__using_task_tags` to our Buildkite `run_models.sh` script. ([#37](https://github.com/fivetran/dbt_asana_source/pull/37))
 
 ## Documentation
 - Corrected references to connectors and connections in the README. ([#36](https://github.com/fivetran/dbt_asana_source/pull/36))
