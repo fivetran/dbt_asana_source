@@ -33,7 +33,7 @@ Include the following asana_source package version in your `packages.yml` file.
 ```yaml
 packages:
   - package: fivetran/asana_source
-    version: [">=0.8.0", "<0.9.0"] # we recommend using ranges to capture non-breaking changes automatically
+    version: [">=0.9.0", "<0.10.0"] # we recommend using ranges to capture non-breaking changes automatically
 ```
 
 ### Step 3: Define database and schema variables
@@ -47,7 +47,20 @@ vars:
     asana_database: your_database_name
     asana_schema: your_schema_name 
 ```
-### (Optional) Step 4: Additional configurations
+
+### Step 4: Enabling/Disabling Models
+
+Your Asana connection might not sync every table that this package expects. If your syncs exclude certain tables, it is either because you do not use that functionality in Asana or have actively excluded some tables from your syncs. In order to enable or disable the relevant tables in the package, you will need to add the following variable(s) to your `dbt_project.yml` file.
+
+By default, all variables are assumed to be `true`.
+
+```yml
+vars:
+    asana__using_tags: false                # default is true
+    asana__using_task_tags: false           # default is true
+```
+
+### (Optional) Step 5: Additional configurations
 <details><summary>Expand for configurations</summary>
 
 #### Passing Through Additional Columns
@@ -80,7 +93,7 @@ vars:
 
 </details>
 
-### (Optional) Step 5: Orchestrate your models with Fivetran Transformations for dbt Core™
+### (Optional) Step 6: Orchestrate your models with Fivetran Transformations for dbt Core™
 <details><summary>Expand for more details</summary>
 
 Fivetran offers the ability for you to orchestrate your dbt project through [Fivetran Transformations for dbt Core™](https://fivetran.com/docs/transformations/dbt). Learn how to set up your project for orchestration through Fivetran in our [Transformations for dbt Core™ setup guides](https://fivetran.com/docs/transformations/dbt#setupguide).

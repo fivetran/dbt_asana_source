@@ -1,13 +1,4 @@
-{% if var('using_asana_task_tags', asana_source.does_table_exist('task_tag')) %}
+{{ config(enabled=var('asana__using_task_tags', True)) }}
 
 select * 
 from {{ var('task_tag') }}
-
-{% else %}
-
-select
-    cast(null as {{ dbt.type_string() }}) as tag_id,
-    cast(null as {{ dbt.type_string() }}) as task_id
-limit {{ '1' if target.type == 'redshift' else '0' }} 
-
-{% endif %}
