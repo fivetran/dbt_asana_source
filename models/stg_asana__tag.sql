@@ -1,3 +1,4 @@
+{{ config(enabled=var('asana__using_tags', True)) }}
 
 with base as (
 
