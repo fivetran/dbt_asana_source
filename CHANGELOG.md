@@ -1,4 +1,5 @@
 # dbt_asana_source v0.8.2
+This release includes the following updates:
 
 ## Under the Hood
 - Prepends `materialized` configs in the package's `dbt_project.yml` file with `+` to improve compatibility with the newer versions of dbt-core starting with v1.10.0. ([PR #38](https://github.com/fivetran/dbt_asana_source/pull/38))
