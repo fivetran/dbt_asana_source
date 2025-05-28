@@ -1,4 +1,6 @@
-<p align="center">
+# Asana Source dbt Package ([Docs](https://fivetran.github.io/dbt_asana_source/))
+
+<p align="left">
     <a alt="License"
         href="https://github.com/fivetran/dbt_asana_source/blob/main/LICENSE">
         <img src="https://img.shields.io/badge/License-Apache%202.0-blue.svg" /></a>
@@ -10,7 +12,6 @@
         <img src="https://img.shields.io/badge/Contributions-welcome-blueviolet" /></a>
 </p>
 
-# Asana Source dbt Package ([Docs](https://fivetran.github.io/dbt_asana_source/))
 ## What does this dbt package do?
 - Materializes [Asana staging tables](https://fivetran.github.io/dbt_asana_source/#!/overview/asana_source/models/?g_v=1&g_e=seeds), which leverage data in the format described by [this ERD](https://fivetran.com/docs/applications/asana#schemainformation). These staging tables clean, test, and prepare your Asana data from [Fivetran's connector](https://fivetran.com/docs/applications/asana) for analysis by doing the following:
   - Names columns for consistency across all packages and for easier analysis
