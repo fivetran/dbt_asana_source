@@ -7,17 +7,19 @@ sources:
 
     loader: fivetran
     loaded_at_field: _fivetran_synced
-      
-    freshness:
-      warn_after: {count: 72, period: hour}
-      error_after: {count: 96, period: hour}
+
+    config:
+      freshness:
+        warn_after: {count: 72, period: hour}
+        error_after: {count: 96, period: hour}
 
 
     tables:
       - name: user
         identifier: "{{ var('asana_user_identifier', 'user')}}"
         description: Table of all accounts in the organization
-        freshness: null
+        config:
+          freshness: null
         columns:
           - name: id
             description: System generated unique ID for a user
@@ -68,7 +70,8 @@ sources:
       - name: project
         identifier: "{{ var('asana_project_identifier', 'project')}}"
         description: Table containing all projects
-        freshness: null
+        config:
+          freshness: null
         columns:
           - name: id
             description: System generated unique ID of the project.
@@ -121,7 +124,8 @@ sources:
       - name: team
         identifier: "{{ var('asana_team_identifier', 'team')}}"
         description: Table of the teams within the organization
-        freshness: null
+        config:
+          freshness: null
         columns:
           - name: id
             description: System generated unique ID for each team
@@ -134,9 +138,9 @@ sources:
       - name: tag
         identifier: "{{ var('asana_tag_identifier', 'tag')}}"
         description: Table of the custom tags made in the organization
-        config: 
+        config:
           enabled: "{{ var('asana__using_tags', True) }}"  # Disable if asana__using_tags is False
-        freshness: null
+          freshness: null
         columns:
           - name: id
             description: System generated ID for each tag
@@ -151,7 +155,8 @@ sources:
       - name: section
         identifier: "{{ var('asana_section_identifier', 'section')}}"
         description: Table of all sections within projects. If tasks in a project are not in an explicit user-made section, a default section called "(no section)" is created here
-        freshness: null
+        config:
+          freshness: null
         columns:
           - name: id
             description: System generated unique ID for each section
@@ -165,7 +170,8 @@ sources:
       - name: project_task
         identifier: "{{ var('asana_project_task_identifier', 'project_task')}}"
         description: Table of tasks and the project(s) they each belong to. If a project doesn't have a task, it won't be in here (and vice versa)
-        freshness: null
+        config:
+          freshness: null
         columns:
           - name: project_id
             description: Foreign key referencing a PROJECT the task belongs to
@@ -176,7 +182,8 @@ sources:
       - name: task_follower
         identifier: "{{ var('asana_task_follower_identifier', 'task_follower')}}"
         description: Table of tasks with the users that are following them. Tasks without users do not appear here.
-        freshness: null
+        config:
+          freshness: null
         columns:
           - name: task_id
             description: Foreign key referencing the TASK being followed
@@ -187,9 +194,9 @@ sources:
       - name: task_tag
         identifier: "{{ var('asana_task_tag_identifier', 'task_tag')}}"
         description: Table of tasks with the tags attached to them. Tasks without tags (and vice versa) do not appear here.
-        config: 
+        config:
           enabled: "{{ var('asana__using_task_tags', True) }}"  # Disable if asana__using_task_tags is False
-        freshness: null
+          freshness: null
         columns:
           - name: task_id
             description: Foreign key referencing the TASK that is tagged
@@ -200,7 +207,8 @@ sources:
       - name: task_section
         identifier: "{{ var('asana_task_section_identifier', 'task_section')}}"
         description: Table of tasks and the section that they live under. Section-less tasks within projects appear here, but project-less tasks do not
-        freshness: null
+        config:
+          freshness: null
         columns:
           - name: section_id
             description: Foreign key referencing the SECTION that the task lives under.
