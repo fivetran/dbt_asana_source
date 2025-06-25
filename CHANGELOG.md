@@ -1,6 +1,6 @@
 # dbt_asana_source v0.9.0
 
-[PR #40](https://github.com/fivetran/dbt_asana_source/pull/40) includes the following updates:
+[PR #41](https://github.com/fivetran/dbt_asana_source/pull/41) includes the following updates:
 
 ## Breaking Change for dbt Core < 1.9.6
 
