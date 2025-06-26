@@ -1,6 +1,6 @@
 config-version: 2
 name: 'asana_source_integration_tests'
-version: 0.8.2
+version: 0.9.0
 profile: 'integration_tests'
 vars:
   asana_schema: asana_source_integrations_tests_3
@@ -82,3 +82,6 @@ seeds:
 dispatch:
   - macro_namespace: dbt_utils
     search_order: ['spark_utils', 'dbt_utils']
+
+flags:
+  send_anonymous_usage_stats: False

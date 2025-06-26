@@ -17,6 +17,7 @@
   - Names columns for consistency across all packages and for easier analysis
   - Removes any rows that are soft-deleted
   - Adds freshness tests to source data
+    - dbt Core >= 1.9.6 is required to run freshness tests out of the box.
   - Adds column-level testing where applicable. For example, all primary keys are tested for uniqueness and non-null values.
 - Generates a comprehensive data dictionary of your Asana data through the [dbt docs site](https://fivetran.github.io/dbt_asana_source/).
 - These tables are designed to work simultaneously with our [Asana transformation package](https://github.com/fivetran/dbt_asana).
@@ -34,7 +35,7 @@ Include the following asana_source package version in your `packages.yml` file.
 ```yaml
 packages:
   - package: fivetran/asana_source
-    version: [">=0.8.0", "<0.9.0"] # we recommend using ranges to capture non-breaking changes automatically
+    version: [">=0.9.0", "<0.10.0"] # we recommend using ranges to capture non-breaking changes automatically
 ```
 
 ### Step 3: Define database and schema variables
