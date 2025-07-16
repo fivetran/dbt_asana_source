@@ -18,6 +18,8 @@ vars:
     asana_task_section_identifier: "task_section_data"
 
 seeds:
+  +docs:
+    show: False
   +quote_columns: "{{ true if target.type == 'redshift' else false }}"
   asana_source_integration_tests:
     +column_types:
@@ -85,3 +87,5 @@ dispatch:
 
 flags:
   send_anonymous_usage_stats: False
+
+  use_colors: True
